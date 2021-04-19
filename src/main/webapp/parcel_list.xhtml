@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+>
+<h:head>
+    <meta charset="UTF-8"/>
+    <h:outputStylesheet library="css" name="style.css"/>
+</h:head>
+<h:body>
+    <div>
+        <div>
+            <h2>Siuntos (#{parcels.parcelList.size()})</h2>
+            <ol>
+                <ui:repeat value="#{parcels.parcelList}" var="parcel">
+                    <li><h:link value="#{parcel.name} (#{parcel.weight} kg)" outcome="parcel?id=#{parcel.id}" /></li>
+                </ui:repeat>
+            </ol>
+            <h:form p:accept-charset="UTF-8">
+                <h:inputText value="#{parcels.parcelToCreate.name}" p:placeholder="Pavadinimas" required="true" />
+                <h:inputText value="#{parcels.parcelToCreate.weight}" p:placeholder="Svoris (kg)" p:size="8" required="true" />
+                <span> kg </span>
+                <h:commandButton value="Pridėti siuntą" action="#{parcels.createParcel}" />
+            </h:form>
+        </div>
+    </div>
+</h:body>
+</html>
