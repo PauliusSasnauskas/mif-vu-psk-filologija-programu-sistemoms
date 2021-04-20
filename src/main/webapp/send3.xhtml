@@ -9,6 +9,7 @@
     <meta charset="UTF-8"/>
 </h:head>
 <h:body>
+    <span>Gavėjo informacija → Siuntos informacija → <b>Apmokėjimas</b></span><br/>
     <h1>Apmokėjimas</h1>
     <h2>Jūsų užsakymas</h2>
     <b>Siuntos siuntimas į [miestas] – 5€</b><br/>
@@ -18,8 +19,10 @@
     <a href="https://www.google.com" target="_blank">Internetine bankininkyste</a><br/>
     <a href="https://www.google.com" target="_blank">Grynaisiais (paėmimo metu)</a><br/>
     <a href="https://www.google.com" target="_blank">PayPal</a><br/>
-
     <br/>
     <h:link value="Patvirtinti" outcome="index" />
+
+    <!-- testing purposes -->
+    <span>#{sendParcel.parcelToSend.length}</span>
 </h:body>
 </html>

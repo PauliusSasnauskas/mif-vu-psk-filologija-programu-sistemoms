@@ -21,7 +21,15 @@ public class Parcel implements Serializable {
 
     private String name;
 
-//    @Column(name = "MASS")
-    private float weight;
+//    @Column(name = "LENGTH")
+    private float length;
 
+//    @Column(name = "WIDTH")
+    private float width;
+
+//    @Column(name = "HEIGHT")
+    private float height;
+
+    //    @Column(name = "MASS")
+    private float weight;
 }

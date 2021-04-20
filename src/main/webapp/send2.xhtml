@@ -4,12 +4,36 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
->
+      xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
     <meta charset="UTF-8"/>
 </h:head>
 <h:body>
-    Siuntos informacija<br/>
-    <h:link value="Toliau" outcome="send3" />
+    <span>Gavėjo informacija → <b>Siuntos informacija</b> → Apmokėjimas</span>
+    <h2>Siuntos parametrai</h2><br/>
+    <h:form>
+        <span>Ilgis </span>
+        <h:inputText value="#{sendParcel.parcelToSend.length}" />
+        <span> cm</span><br/>
+        <span>Plotis </span>
+        <h:inputText value="#{sendParcel.parcelToSend.width}" />
+        <span> cm</span><br/>
+        <span>Aukštis </span>
+        <h:inputText value="#{sendParcel.parcelToSend.height}" />
+        <span> cm</span><br/>
+        <span>Svoris </span>
+        <h:inputText value="#{sendParcel.parcelToSend.weight}" />
+        <span> kg</span><br/>
+
+        <h:selectManyCheckbox value="#{sendParcel.selectedOptions}" layout="pageDirection">
+            <f:selectItem itemValue="fragile" itemLabel="Dūžtanti siunta (+5€ * masė)"/>
+            <f:selectItem itemValue="signDocument" itemLabel="Priimant būtina pasirašyti dokumentą (+3€)"/>
+            <f:selectItem itemValue="donateToChildren" itemLabel="Paremti globos namuose esančius vaikus (+2€)"/>
+            <f:selectItem itemValue="sustainable" itemLabel="Siųsti gamtą tausojančiu būdu (siuntą siųs kurjeris su dviračiu) (+30€)"/>
+        </h:selectManyCheckbox>
+
+        <h:commandButton value="Toliau" action="#{sendParcel.goToPayment()}" />
+    </h:form>
+    <h:link value="Atgal" outcome="send1"/>
 </h:body>
 </html>

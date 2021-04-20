@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="TeamFPS" />
+        <module name="mif-vu-psk-filologija-programu-sistemoms" />
       </profile>
     </annotationProcessing>
   </component>
