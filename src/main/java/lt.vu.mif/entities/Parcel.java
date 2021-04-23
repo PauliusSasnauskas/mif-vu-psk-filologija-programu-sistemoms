@@ -6,6 +6,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Entity
 @NamedQueries({
@@ -32,4 +33,7 @@ public class Parcel implements Serializable {
 
     //    @Column(name = "MASS")
     private float weight;
+
+    // @Column(name = "PRICE")
+    private BigDecimal price;
 }

@@ -4,6 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">
 >
 <h:head>
     <meta charset="UTF-8"/>
@@ -14,7 +15,10 @@
     <h2>Jūsų užsakymas</h2>
     <b>Siuntos siuntimas į [miestas] – 5€</b><br/>
     <b>Papildomos siuntos paslaugos – dūžtanti siunta – 15€</b><br/>
-    <b>Suma: 20€</b><br/>
+
+    <h:outputLabel id="currentPrice" value="Kaina: #{sendParcel.parcelToSend.price} €" >
+        <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+    </h:outputLabel><br/>
     <h2>Pasirinkite mokėjimo būdą</h2>
     <a href="https://www.google.com" target="_blank">Internetine bankininkyste</a><br/>
     <a href="https://www.google.com" target="_blank">Grynaisiais (paėmimo metu)</a><br/>
