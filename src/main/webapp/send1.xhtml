@@ -4,12 +4,80 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">
 >
 <h:head>
     <meta charset="UTF-8"/>
 </h:head>
 <h:body>
     <span><b>Gavėjo informacija</b> → Siuntos informacija → Apmokėjimas</span><br/>
-    <h:link value="Toliau" outcome="send2" />
+    <br/>
+    <h:form style=" float: left;">
+        <table>
+            <tr>
+                <td>Vardas, Pavardė </td>
+                <td><h:inputText value="#{sendParcel.parcelToSend.recipient}"/></td>
+                <td style="width: 200px;"></td>
+            </tr>
+            <tr>
+                <td>Gatvė</td>
+                <td><h:inputText value="#{sendParcel.parcelToSend.street}"/></td>
+            </tr>
+            <tr>
+                <td>Namo nr.</td>
+                <td><h:inputText value="#{sendParcel.parcelToSend.houseNumber}"/></td>
+            </tr>
+            <tr>
+                <td>Buto nr.</td>
+                <td><h:inputText value="#{sendParcel.parcelToSend.flatNumber}"/></td>
+            </tr>
+            <tr>
+                <td>Miestas</td>
+                <td><h:inputText value="#{sendParcel.parcelToSend.city}"/></td>
+            </tr>
+            <tr>
+                <td>Šalis</td>
+                <td><h:inputText value="#{sendParcel.parcelToSend.country}"/></td>
+            </tr>
+            <tr>
+                <td>Pašto kodas</td>
+                <td><h:inputText value="#{sendParcel.parcelToSend.postalCode}"/></td>
+            </tr>
+        </table>
+        <h:commandButton value="Atgal" action="#{sendParcel.goToHomePage}" />
+        <h:commandButton value="Toliau" action="#{sendParcel.goToParcelParameters}" />
+    </h:form>
+    <table style="border: 1px solid black; padding: 10px; width: 207px;">
+        <tr><td>
+            <table>
+                <tr>
+                    <td>Siuntimas Lietuvoje: </td>
+                    <td style="border: 1px solid black;"><b>3eur</b></td>
+                </tr>
+                <tr>
+                    <td>Siuntimas ES: </td>
+                    <td style="border: 1px solid black;"><b>2eur</b></td>
+                </tr>
+                <tr>
+                    <td>Siuntimas ne ES: </td>
+                    <td style="border: 1px solid black;"><b>1eur</b></td>
+                </tr>
+            </table>
+        </td></tr>
+    </table>
+    <table style="border: 1px solid black;padding: 10px; margin-top: 25px; width: 207px;">
+        <tr><td>
+            <table>
+                <tr>
+                    <td>Einamoji kaina: </td>
+                    <td style="border: 1px solid black;">
+                        <h:outputLabel value="#{sendParcel.parcelToSend.price} €" >
+                            <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                        </h:outputLabel><br/>
+                    </td>
+                </tr>
+            </table>
+        </td></tr>
+    </table>
 </h:body>
 </html>

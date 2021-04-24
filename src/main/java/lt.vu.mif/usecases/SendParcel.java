@@ -25,6 +25,14 @@ public class SendParcel implements Serializable {
         return "send3.xhtml";
     }
 
+    public String goToParcelParameters(){
+        return "send2.xhtml";
+    }
+
+    public String goToHomePage(){
+        return "index.xhtml";
+    }
+
     public void calcPrice() {
         BigDecimal price = new BigDecimal("0.00");
 
