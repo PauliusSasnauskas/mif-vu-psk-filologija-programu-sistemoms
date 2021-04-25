@@ -22,40 +22,19 @@ public class Parcel implements Serializable {
 
     private String name;
 
-//    @Column(name = "LENGTH")
     private float length;
-
-//    @Column(name = "WIDTH")
     private float width;
-
-//    @Column(name = "HEIGHT")
     private float height;
 
-    //    @Column(name = "MASS")
     private float weight;
 
-    // @Column(name = "PRICE")
     private BigDecimal price;
 
-    // @Column(name = "RECIPIENT")
     private String recipient;
-
-    // @Column(name = "STREET")
     private String street;
-
-    // @Column(name = "HOUSE_NUMBER")
     private int houseNumber;
-
-    // @Column(name = "FLAT_NUMBER")
     private int flatNumber;
-
-    // @Column(name = "CITY")
     private String city;
-
-    // @Column(name = "COUNTRY")
     private String country;
-
-    // @Column(name = "POSTAL_CODE")
     private int postalCode;
-
 }
