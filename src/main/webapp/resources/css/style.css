@@ -10,3 +10,22 @@ body > div {
 body > div > div {
     flex-grow: 1;
 }
+
+.home-button {
+    display: inline-block;
+    width: 5em;
+    height: 5em;
+    border:0.1em solid #CCCCCC;
+    margin:0 0.3em 0.3em 0;
+    font-family: sans-serif;
+    color: black;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.home-button:hover {
+    color: #FFFFFF;
+    background-color: #f14e4e;
+    border-color: #f14e4e;
+}
