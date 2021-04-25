@@ -13,12 +13,16 @@
     <span>Gavėjo informacija → Siuntos informacija → <b>Apmokėjimas</b></span><br/>
     <h1>Apmokėjimas</h1>
     <h2>Jūsų užsakymas</h2>
-    <b>Siuntos siuntimas į #{sendParcel.parcelToSend.country} – 5€</b><br/>
-    <b>Papildomos siuntos paslaugos – dūžtanti siunta – 15€</b><br/>
+    <ul>
+        <li>Siuntos siuntimas į #{sendParcel.parcelToSend.country} – ???€</li>
+        <ui:repeat value="#{sendParcel.selectedOptions}" var="option">
+            <li>#{sendParcel.getPriceOptionsNames().get(option)}</li>
+        </ui:repeat>
+    </ul>
 
-    <h:outputLabel id="currentPrice" value="Kaina: #{sendParcel.parcelToSend.price} €" >
+    <b><h:outputLabel id="currentPrice" value="Kaina: #{sendParcel.parcelToSend.price} €" >
         <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
-    </h:outputLabel><br/>
+    </h:outputLabel></b><br/><br/>
 
     <h:form id="parcelPayForm">
         Pasirinkite mokėjimo būdą:

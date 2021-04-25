@@ -5,6 +5,7 @@ import lombok.Setter;
 import lt.vu.mif.entities.Parcel;
 import lt.vu.mif.persistence.ParcelsDAO;
 
+import javax.enterprise.context.Dependent;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
@@ -25,7 +26,7 @@ public class SendParcel implements Serializable {
 
     private Parcel parcelToSend = new Parcel();
 
-    private List<String> selectedOptions;
+    private List<String> selectedOptions = new ArrayList<>();
 
     public String goToPayment(){
         return "send3.xhtml";
@@ -43,6 +44,13 @@ public class SendParcel implements Serializable {
         return "index.xhtml";
     }
 
+    private final Map<String, BigDecimal> priceOptions = Map.of(
+            "fragile", new BigDecimal("5"),
+            "signDocument", new BigDecimal("3"),
+            "donateToChildren", new BigDecimal("2"),
+            "sustainable", new BigDecimal("30")
+    );
+
     public void calcPrice() {
         BigDecimal price = new BigDecimal("0.00");
 
@@ -50,23 +58,8 @@ public class SendParcel implements Serializable {
             price = price.add(new BigDecimal("10"));
         }
 
-        if(selectedOptions != null) {
-            for (String option : selectedOptions) {
-                switch (option) {
-                    case "fragile":
-                        price = price.add(new BigDecimal("5"));
-                        break;
-                    case "signDocument":
-                        price = price.add(new BigDecimal("3"));
-                        break;
-                    case "donateToChildren":
-                        price = price.add(new BigDecimal("2"));
-                        break;
-                    case "sustainable":
-                        price = price.add(new BigDecimal("30"));
-                        break;
-                }
-            }
+        for (String option : selectedOptions) {
+            price = price.add(priceOptions.get(option));
         }
 
         parcelToSend.setPrice(price);
@@ -82,6 +75,16 @@ public class SendParcel implements Serializable {
         return new ArrayList<>(payOptions.entrySet());
     }
 
+    public List<Map.Entry<String, BigDecimal>> getPriceOptions(){
+        return new ArrayList<>(priceOptions.entrySet());
+    }
+
+    private final Map<String, String> priceOptionsNames = Map.of(
+            "fragile", "Dūžtanti siunta, (+5€ * masė)",
+            "signDocument", "Priimant būtina pasirašyti dokumentą (+3€)",
+            "donateToChildren", "Paremti globos namuose esančius vaikus (+2€)",
+            "sustainable", "Siųsti gamtą tausojančiu būdu (siuntą siųs kurjeris su dviračiu) (+30€)"
+    );
 
     @Transactional
     public String commitSend(){
