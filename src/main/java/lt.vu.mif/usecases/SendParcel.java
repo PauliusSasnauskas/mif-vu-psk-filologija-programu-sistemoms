@@ -44,12 +44,12 @@ public class SendParcel implements Serializable {
         return "index.xhtml";
     }
 
-    private final Map<String, BigDecimal> priceOptions = Map.of(
-            "fragile", new BigDecimal("5"),
-            "signDocument", new BigDecimal("3"),
-            "donateToChildren", new BigDecimal("2"),
-            "sustainable", new BigDecimal("30")
-    );
+    private final Map<String, BigDecimal> priceOptions = new HashMap<String, BigDecimal>() {{
+        put("fragile", new BigDecimal("5"));
+        put("signDocument", new BigDecimal("3"));
+        put("donateToChildren", new BigDecimal("2"));
+        put("sustainable", new BigDecimal("30"));
+    }};
 
     public void calcPrice() {
         BigDecimal price = new BigDecimal("0.00");
@@ -66,11 +66,12 @@ public class SendParcel implements Serializable {
         FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("parcelInfoForm:currentPrice");
     }
 
-    private final Map<Integer, String> payOptions = Map.of(
-        Parcel.PAY_OPTION_BANK, "Internetine bankininkyste",
-        Parcel.PAY_OPTION_CASH, "Grynaisiais (paėmimo metu)",
-        Parcel.PAY_OPTION_PAYPAL, "PayPal"
-    );
+    private final Map<Integer, String> payOptions = new HashMap<Integer, String>() {{
+        put(Parcel.PAY_OPTION_BANK, "Internetine bankininkyste");
+        put(Parcel.PAY_OPTION_CASH, "Grynaisiais (paėmimo metu)");
+        put(Parcel.PAY_OPTION_PAYPAL, "PayPal");
+    }};
+
     public List<Map.Entry<Integer, String>> getPayOptions(){
         return new ArrayList<>(payOptions.entrySet());
     }
@@ -79,12 +80,12 @@ public class SendParcel implements Serializable {
         return new ArrayList<>(priceOptions.entrySet());
     }
 
-    private final Map<String, String> priceOptionsNames = Map.of(
-            "fragile", "Dūžtanti siunta, (+5€ * masė)",
-            "signDocument", "Priimant būtina pasirašyti dokumentą (+3€)",
-            "donateToChildren", "Paremti globos namuose esančius vaikus (+2€)",
-            "sustainable", "Siųsti gamtą tausojančiu būdu (siuntą siųs kurjeris su dviračiu) (+30€)"
-    );
+    private final Map<String, String> priceOptionsNames = new HashMap<String, String>() {{
+        put("fragile", "Dūžtanti siunta, (+5€ * masė)");
+        put("signDocument", "Priimant būtina pasirašyti dokumentą (+3€)");
+        put("donateToChildren", "Paremti globos namuose esančius vaikus (+2€)");
+        put("sustainable", "Siųsti gamtą tausojančiu būdu (siuntą siųs kurjeris su dviračiu) (+30€)");
+    }};
 
     @Transactional
     public String commitSend(){
