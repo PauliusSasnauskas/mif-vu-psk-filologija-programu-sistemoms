@@ -3,19 +3,25 @@ package lt.vu.mif.usecases;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.entities.Parcel;
+import lt.vu.mif.persistence.ParcelsDAO;
 
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.*;
 
 @Model
 @Getter
 @Setter
 @SessionScoped
 public class SendParcel implements Serializable {
+
+    @Inject
+    private ParcelsDAO parcelsDAO;
 
     private Parcel parcelToSend = new Parcel();
 
@@ -27,6 +33,10 @@ public class SendParcel implements Serializable {
 
     public String goToParcelParameters(){
         return "send2.xhtml";
+    }
+
+    public String goToRecipientParameters(){
+        return "send1.xhtml";
     }
 
     public String goToHomePage(){
@@ -61,5 +71,23 @@ public class SendParcel implements Serializable {
 
         parcelToSend.setPrice(price);
         FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("parcelInfoForm:currentPrice");
+    }
+
+    private final Map<Integer, String> payOptions = Map.of(
+        Parcel.PAY_OPTION_BANK, "Internetine bankininkyste",
+        Parcel.PAY_OPTION_CASH, "Grynaisiais (paėmimo metu)",
+        Parcel.PAY_OPTION_PAYPAL, "PayPal"
+    );
+    public List<Map.Entry<Integer, String>> getPayOptions(){
+        return new ArrayList<>(payOptions.entrySet());
+    }
+
+
+    @Transactional
+    public String commitSend(){
+        parcelsDAO.persist(parcelToSend);
+        parcelToSend = new Parcel();
+        System.out.println(parcelToSend.toString());
+        return "index.xhtml";
     }
 }

@@ -13,8 +13,13 @@ import java.math.BigDecimal;
         @NamedQuery(name = "Parcel.findAll", query = "select a from Parcel as a")
 })
 @Data
+@ToString
 
 public class Parcel implements Serializable {
+
+    public static final int PAY_OPTION_BANK = 0;
+    public static final int PAY_OPTION_CASH = 1;
+    public static final int PAY_OPTION_PAYPAL = 2;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,4 +42,6 @@ public class Parcel implements Serializable {
     private String city;
     private String country;
     private int postalCode;
+
+    private int payOption;
 }
