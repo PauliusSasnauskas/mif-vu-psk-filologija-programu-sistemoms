@@ -12,7 +12,8 @@ body > div > div {
 }
 
 .home-button {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     width: 5em;
     height: 5em;
     border:0.1em solid #CCCCCC;
