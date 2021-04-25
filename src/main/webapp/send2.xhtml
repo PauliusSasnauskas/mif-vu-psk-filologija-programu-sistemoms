@@ -12,24 +12,51 @@
     <span>Gavėjo informacija → <b>Siuntos informacija</b> → Apmokėjimas</span>
     <h2>Siuntos parametrai</h2><br/>
     <h:form id="parcelInfoForm" style="float: left;">
-        <span>Ilgis </span>
-        <h:inputText value="#{sendParcel.parcelToSend.length}">
-            <f:ajax event="change" listener="#{sendParcel.calcPrice()}"/>
-        </h:inputText>
-        <span> cm</span><br/>
-        <span>Plotis </span>
-        <h:inputText value="#{sendParcel.parcelToSend.width}" >
-            <f:ajax event="change" listener="#{sendParcel.calcPrice()}"/>
-        </h:inputText>
-        <span> cm</span><br/>
-        <span>Aukštis </span>
-        <h:inputText value="#{sendParcel.parcelToSend.height}" >
-            <f:ajax event="change" listener="#{sendParcel.calcPrice()}"/>
-        </h:inputText>
-        <span> cm</span><br/>
-        <span>Svoris </span>
-        <h:inputText value="#{sendParcel.parcelToSend.weight}" />
-        <span> kg</span><br/>
+        <table>
+            <tr>
+                <td>Ilgis </td>
+                <td><h:inputText value="#{sendParcel.parcelToSend.length}"
+                             required="true" requiredMessage="Įveskite siuntos ilgį!"
+                             converterMessage="Siuntos ilgis turi būti skaičius."
+                             validatorMessage="Siuntos ilgis turi būti neneigiamas skaičius.">
+                    <f:validateLongRange minimum="0" />
+                    <f:ajax event="change" listener="#{sendParcel.calcPrice()}"/>
+                </h:inputText></td>
+                <td> cm</td>
+            </tr>
+            <tr>
+                <td>Plotis </td>
+                <td><h:inputText value="#{sendParcel.parcelToSend.width}"
+                                 required="true" requiredMessage="Įveskite siuntos plotį!"
+                                 converterMessage="Siuntos plotis turi būti skaičius."
+                                 validatorMessage="Siuntos plotis turi būti neneigiamas skaičius.">
+                        <f:validateLongRange minimum="0" />
+                        <f:ajax event="change" listener="#{sendParcel.calcPrice()}"/>
+                    </h:inputText></td>
+                <td> cm</td>
+            </tr>
+            <tr>
+                <td>Aukštis </td>
+                <td><h:inputText value="#{sendParcel.parcelToSend.height}"
+                                 required="true" requiredMessage="Įveskite siuntos aukštį!"
+                                 converterMessage="Siuntos aukštis turi būti skaičius."
+                                 validatorMessage="Siuntos aukštis turi būti neneigiamas skaičius.">
+                        <f:validateLongRange minimum="0" />
+                        <f:ajax event="change" listener="#{sendParcel.calcPrice()}"/>
+                    </h:inputText></td>
+                <td> cm</td>
+            </tr>
+            <tr>
+                <td>Masė </td>
+                <td><h:inputText value="#{sendParcel.parcelToSend.weight}"
+                                 required="true" requiredMessage="Įveskite siuntos masę!"
+                                 converterMessage="Siuntos masė turi būti skaičius."
+                                 validatorMessage="Siuntos masė turi būti neneigiamas skaičius.">
+                    <f:validateLongRange minimum="0" />
+                    </h:inputText></td>
+                <td> kg</td>
+            </tr>
+        </table>
 
         <h:selectManyCheckbox value="#{sendParcel.selectedOptions}" layout="pageDirection">
             <f:ajax event="change" listener="#{sendParcel.calcPrice()}"/>
