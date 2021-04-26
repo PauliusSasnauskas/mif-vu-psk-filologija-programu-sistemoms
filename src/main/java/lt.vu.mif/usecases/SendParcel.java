@@ -13,6 +13,8 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.*;
 
 @Model
@@ -27,6 +29,8 @@ public class SendParcel implements Serializable {
     private Parcel parcelToSend = new Parcel();
 
     private List<String> selectedOptions = new ArrayList<>();
+
+    private MathContext priceMC = new MathContext(3, RoundingMode.HALF_UP);
 
     public String goToPayment(){
         return "send3.xhtml";
@@ -45,25 +49,57 @@ public class SendParcel implements Serializable {
     }
 
     private final Map<String, BigDecimal> priceOptions = new HashMap<String, BigDecimal>() {{
-        put("fragile", new BigDecimal("5"));
-        put("signDocument", new BigDecimal("3"));
-        put("donateToChildren", new BigDecimal("2"));
-        put("sustainable", new BigDecimal("30"));
+        put("fragile", new BigDecimal("5.00"));
+        put("signDocument", new BigDecimal("3.00"));
+        put("donateToChildren", new BigDecimal("2.00"));
+        put("sustainable", new BigDecimal("30.00"));
+    }};
+
+    // Feel free to change countryOptions and CountryPriceOptions maps
+    private final List<String> countryOptions = new ArrayList<String>(){{
+       add("Lietuva");
+       add("Latvija");
+       add("Kuba");
+    }};
+
+    private final Map<String, String> countryRegionsOptions = new HashMap<String, String>() {{
+        put("Lietuva", "LTU");
+        put("Latvija", "ES");
+        put("Kuba", "NOT_ES");
+    }};
+
+    private final Map<String, BigDecimal> regionPriceOptions = new HashMap<String, BigDecimal>() {{
+        put("LTU", new BigDecimal("3.00"));
+        put("ES", new BigDecimal("2.00"));
+        put("NOT_ES", new BigDecimal("1.00"));
     }};
 
     public void calcPrice() {
-        BigDecimal price = new BigDecimal("0.00");
+        BigDecimal price = new BigDecimal("0.00", priceMC);
+
+        price = price.add(regionPriceOptions.get(countryRegionsOptions.get(parcelToSend.getCountry())), priceMC);
+        price.setScale(2, priceMC.getRoundingMode());
+
 
         if (parcelToSend.getLength() > 50 || parcelToSend.getHeight() > 50 || parcelToSend.getWidth() > 50) {
-            price = price.add(new BigDecimal("10"));
+            price = price.add(new BigDecimal("10.00"), priceMC);
         }
 
         for (String option : selectedOptions) {
-            price = price.add(priceOptions.get(option));
+            if (option.equals("fragile")) {
+                BigDecimal weightBD = BigDecimal.valueOf(parcelToSend.getWeight());
+                weightBD = weightBD.setScale(3, priceMC.getRoundingMode());
+                price = price.add((priceOptions.get(option)).multiply(weightBD, priceMC), priceMC);
+            } else {
+                price = price.add(priceOptions.get(option), priceMC);
+
+            }
         }
 
-        parcelToSend.setPrice(price);
+        parcelToSend.setPrice(price.setScale(2, priceMC.getRoundingMode()));
+        FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("senderInfoForm:currentPrice");
         FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("parcelInfoForm:currentPrice");
+
     }
 
     private final Map<Integer, String> payOptions = new HashMap<Integer, String>() {{

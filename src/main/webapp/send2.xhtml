@@ -53,6 +53,7 @@
                                  converterMessage="Siuntos masė turi būti skaičius."
                                  validatorMessage="Siuntos masė turi būti neneigiamas skaičius.">
                     <f:validateLongRange minimum="0" />
+                    <f:ajax event="change" listener="#{sendParcel.calcPrice()}"/>
                     </h:inputText></td>
                 <td> kg</td>
             </tr>
