@@ -29,12 +29,18 @@
                 <td>Namo nr.</td>
                 <td><h:inputText value="#{sendParcel.parcelToSend.houseNumber}"
                                  required="true" requiredMessage="Įveskite namo numerį!"
-                                 converterMessage="Namo numeris turi būti sudarytas iš skaitmenų"/></td>
+                                 converterMessage="Namo numeris turi būti sudarytas iš skaitmenų"
+                                 validatorMessage="Namo numeris turi būti neneigiamas skaičius.">
+                        <f:validateLongRange minimum="0" />
+                    </h:inputText></td>
             </tr>
             <tr>
                 <td>Buto nr.</td>
                 <td><h:inputText value="#{sendParcel.parcelToSend.flatNumber}"
-                                 converterMessage="Buto numeris turi būti sudarytas iš skaitmenų"/></td>
+                                 converterMessage="Buto numeris turi būti sudarytas iš skaitmenų"
+                                 validatorMessage="Buto numeris turi būti neneigiamas skaičius.">
+                        <f:validateLongRange minimum="0" />
+                    </h:inputText></td>
             </tr>
             <tr>
                 <td>Miestas</td>
@@ -54,7 +60,10 @@
                 <td>Pašto kodas</td>
                 <td><h:inputText value="#{sendParcel.parcelToSend.postalCode}"
                                  required="true" requiredMessage="Įveskite pašto kodą!"
-                                 converterMessage="Pašto kodas turi būti sudarytas iš skaitmenų"/></td>
+                                 converterMessage="Pašto kodas turi būti sudarytas iš skaitmenų"
+                                 validatorMessage="Pašto kodas turi būti neneigiamas skaičius.">
+                        <f:validateLongRange minimum="0" />
+                    </h:inputText></td>
             </tr>
             <tr>
                <td><h:commandButton style="margin-left: 90px; margin-right: 30px; margin-top: 10px;"
