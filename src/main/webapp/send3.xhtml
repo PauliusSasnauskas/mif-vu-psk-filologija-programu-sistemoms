@@ -10,9 +10,10 @@
     <meta charset="UTF-8"/>
 </h:head>
 <h:body>
-    <span>Gavėjo informacija → Siuntos informacija → <b>Apmokėjimas</b></span><br/>
-    <h1>Apmokėjimas</h1>
-    <h2>Jūsų užsakymas</h2>
+    <h:link value="Pradžia" outcome="index.html" /><br/><br/>
+    <div>Gavėjo informacija → Siuntos informacija → <b>Apmokėjimas</b></div>
+    <h3>Apmokėjimas</h3>
+    <h4>Jūsų užsakymas</h4>
     <ul>
         <li>Siuntos siuntimas į #{sendParcel.parcelToSend.country} – ???€</li>
         <ui:repeat value="#{sendParcel.selectedOptions}" var="option">
