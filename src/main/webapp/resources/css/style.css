@@ -30,3 +30,8 @@ body > div > div {
     background-color: #f14e4e;
     border-color: #f14e4e;
 }
+
+.parcelsTable, .parcelsTable tr, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}

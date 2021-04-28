@@ -24,13 +24,11 @@ public class Parcel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private String name;
 
     private float length;
     private float width;
     private float height;
-
     private float weight;
 
     private BigDecimal price;
@@ -42,6 +40,8 @@ public class Parcel implements Serializable {
     private String city;
     private String country;
     private int postalCode;
+    private String sentDate;
+    private String status;
 
     private int payOption;
 }

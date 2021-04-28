@@ -24,6 +24,25 @@
                 <span> kg </span>
                 <h:commandButton value="Pridėti siuntą" action="#{parcels.createParcel}" />
             </h:form>
+            <br/>
+            <table class="parcelsTable">
+                <tr>
+                    <th>Nr.</th>
+                    <th>Gavėjas</th>
+                    <th>Išsiuntimo data</th>
+                    <th>Būsena</th>
+                    <th>Kaina</th>
+                </tr>
+                <ui:repeat value="#{parcels.parcelList}" var="parcel">
+                    <tr>
+                        <td><h:link value="#{parcel.id}" outcome="parcel?id=#{parcel.id}" /></td>
+                        <td>#{parcel.recipient}</td>
+                        <td>#{parcel.sentDate}</td>
+                        <td>#{parcel.status}</td>
+                        <td>#{parcel.price}€</td>
+                    </tr>
+                </ui:repeat>
+            </table>
         </div>
     </div>
 </h:body>
