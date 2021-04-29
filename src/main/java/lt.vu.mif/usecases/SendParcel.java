@@ -118,7 +118,7 @@ public class SendParcel implements Serializable {
     }
 
     private final Map<String, String> priceOptionsNames = new HashMap<String, String>() {{
-        put("fragile", "Dūžtanti siunta, (+5€ * masė)");
+        put("fragile", "Dūžtanti siunta, (+5€ * kg)");
         put("signDocument", "Priimant būtina pasirašyti dokumentą (+3€)");
         put("donateToChildren", "Paremti globos namuose esančius vaikus (+2€)");
         put("sustainable", "Siųsti gamtą tausojančiu būdu (siuntą siųs kurjeris su dviračiu) (+30€)");
