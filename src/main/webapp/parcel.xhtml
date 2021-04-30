@@ -6,12 +6,12 @@
       xmlns:h="http://java.sun.com/jsf/html" xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:f="http://java.sun.com/jsf/core" xml:lang="en" lang="en">
 <head>
-    <title>Title</title>
+    <title>Siuntos informacija</title>
 </head>
 <body>
-<div>
-    <h:link value="&lt; Pradžia" outcome="index" />
+    <div>
+        <h:link outcome="index.html"><h:graphicImage style="width: 250px;" value="resources/logo.png"/></h:link>
         <h2>Siunta - #{parcelInfo.currentParcel.name} (#{parcelInfo.currentParcel.weight} kg)</h2>
-</div>
+    </div>
 </body>
 </html>

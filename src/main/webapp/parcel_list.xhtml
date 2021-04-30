@@ -7,11 +7,13 @@
 >
 <h:head>
     <meta charset="UTF-8"/>
+    <title>Siuntų sąrašas</title>
     <h:outputStylesheet library="css" name="style.css"/>
 </h:head>
 <h:body>
     <div>
         <div>
+            <h:link outcome="index.html"><h:graphicImage style="width: 250px;" value="resources/logo.png"/></h:link>
             <h2>Siuntos (#{parcels.parcelList.size()})</h2>
             <ol>
                 <ui:repeat value="#{parcels.parcelList}" var="parcel">
@@ -24,6 +26,25 @@
                 <span> kg </span>
                 <h:commandButton value="Pridėti siuntą" action="#{parcels.createParcel}" />
             </h:form>
+            <br/>
+            <table class="parcelsTable">
+                <tr>
+                    <th>Nr.</th>
+                    <th>Gavėjas</th>
+                    <th>Išsiuntimo data</th>
+                    <th>Būsena</th>
+                    <th>Kaina</th>
+                </tr>
+                <ui:repeat value="#{parcels.parcelList}" var="parcel">
+                    <tr>
+                        <td><h:link value="#{parcel.id}" outcome="parcel?id=#{parcel.id}" /></td>
+                        <td>#{parcel.recipient}</td>
+                        <td>#{parcel.sentDate}</td>
+                        <td>#{parcel.status}</td>
+                        <td>#{parcel.price}€</td>
+                    </tr>
+                </ui:repeat>
+            </table>
         </div>
     </div>
 </h:body>

@@ -15,6 +15,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Model
@@ -117,14 +118,20 @@ public class SendParcel implements Serializable {
     }
 
     private final Map<String, String> priceOptionsNames = new HashMap<String, String>() {{
-        put("fragile", "Dūžtanti siunta, (+5€ * masė)");
+        put("fragile", "Dūžtanti siunta, (+5€ * kg)");
         put("signDocument", "Priimant būtina pasirašyti dokumentą (+3€)");
         put("donateToChildren", "Paremti globos namuose esančius vaikus (+2€)");
         put("sustainable", "Siųsti gamtą tausojančiu būdu (siuntą siųs kurjeris su dviračiu) (+30€)");
     }};
 
+    private String getTodaysDate(){
+        return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+    }
+
     @Transactional
     public String commitSend(){
+        parcelToSend.setSentDate(getTodaysDate());
+        parcelToSend.setStatus("sent");        // placeholder status
         parcelsDAO.persist(parcelToSend);
         parcelToSend = new Parcel();
         System.out.println(parcelToSend.toString());
