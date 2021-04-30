@@ -1,17 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html
-        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html" xmlns:c="http://java.sun.com/jsp/jstl/core"
-      xmlns:f="http://java.sun.com/jsf/core" xml:lang="en" lang="en">
-<head>
-    <title>Siuntos informacija</title>
-</head>
-<body>
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+                template="./resources/layout.xhtml">
+    <ui:define name="head">
+        <title>Omništai – Siuntos informacija</title>
+    </ui:define>
+    <ui:define name="content">
     <div>
-        <h:link outcome="index.html"><h:graphicImage style="width: 250px;" value="resources/logo.png"/></h:link>
         <h2>Siunta - #{parcelInfo.currentParcel.name} (#{parcelInfo.currentParcel.weight} kg)</h2>
     </div>
-</body>
-</html>
+    </ui:define>
+</ui:composition>

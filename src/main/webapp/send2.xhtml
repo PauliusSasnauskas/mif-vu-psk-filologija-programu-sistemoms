@@ -1,16 +1,15 @@
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:f="http://java.sun.com/jsf/core">
-<h:head>
-    <meta charset="UTF-8"/>
-    <title>Siuntos parametrai</title>
-</h:head>
-<h:body>
-    <h:link outcome="index.html"><h:graphicImage style="width: 250px;" value="resources/logo.png"/></h:link>
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="./resources/layout.xhtml">
+    <ui:define name="head">
+        <title>Omništai – Siuntos informacija</title>
+    </ui:define>
+    <ui:define name="content">
     <br/><br/>
     <div>Gavėjo informacija → <b>Siuntos informacija</b> → Apmokėjimas</div>
     <h3>Siuntos parametrai</h3>
@@ -90,5 +89,5 @@
             </table>
         </td></tr>
     </table>
-</h:body>
-</html>
+    </ui:define>
+</ui:composition>
