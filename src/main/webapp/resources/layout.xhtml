@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <h:outputStylesheet name="css/layout.css"/>
+  <ui:insert name="head">
+    <title>Omništai</title>
+  </ui:insert>
+</h:head>
+
+<h:body>
+  <div class="navContainer">
+    <nav class="mainNav">
+      <a href="index.xhtml" class="navLogo">
+        <h:graphicImage url="/resources/img/omnistai_logo.png"/>
+      </a>
+      <div class="navOther">
+        <a href="login.xhtml">Login</a>
+      </div>
+    </nav>
+  </div>
+
+
+  <div class="content">
+    <ui:insert name="content">Content</ui:insert>
+  </div>
+
+</h:body>
+</html>
