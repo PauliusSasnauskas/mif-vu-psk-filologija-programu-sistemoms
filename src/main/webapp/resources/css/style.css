@@ -1,14 +1,9 @@
-body {
-    display: flex;
-    flex-direction: column;
-}
-
-body > div {
+.button-group {
     display: flex;
     flex-direction: row;
-}
-body > div > div {
-    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
 }
 
 .home-button {
@@ -27,6 +22,6 @@ body > div > div {
 
 .home-button:hover {
     color: #FFFFFF;
-    background-color: #f14e4e;
-    border-color: #f14e4e;
+    background-color: #C3042F;
+    border-color: #C3042F;
 }
