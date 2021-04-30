@@ -1,0 +1,15 @@
+.login-form {
+    text-align: center;
+    margin-top: 32px;
+}
+
+.login-form > span {
+    width: 150px;
+    margin-bottom: 12px;
+    display: inline-block;
+    text-align: end;
+}
+
+.login-button {
+    margin-bottom: 32px;
+}

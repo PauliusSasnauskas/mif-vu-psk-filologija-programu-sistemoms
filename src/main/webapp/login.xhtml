@@ -4,11 +4,21 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:f="http://java.sun.com/jsf/core"
                 template="./resources/layout.xhtml">
   <ui:define name="head">
     <title>Omništai – Prisijungimas</title>
+    <h:outputStylesheet library="css" name="login.css"/>
   </ui:define>
   <ui:define name="content">
-    Hello world, Content!
+    <h1>Prisijungti</h1>
+    <h:form styleClass="login-form">
+      <span>Naudotojo vardas: </span>
+      <h:inputText value="" required="true" requiredMessage="Įveskite naudotojo vardą."/><br/>
+      <span>Slaptažodis: </span>
+      <h:inputSecret value="" required="true" requiredMessage="Įveskite slaptažodį."/><br/>
+      <h:commandButton styleClass="login-button" value="Prisijungti"/><br/>
+      Neturite paskyros? <a href="#">Registruokitės</a>.
+    </h:form>
   </ui:define>
 </ui:composition>
