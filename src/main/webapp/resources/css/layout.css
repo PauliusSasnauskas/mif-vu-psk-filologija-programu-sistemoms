@@ -17,8 +17,13 @@ html, body {
 .navContainer {
     width: 100%;
     background: linear-gradient(90deg, #F04E23, #C3042F);
-    margin-bottom: 64px;
+    margin-bottom: 16px;
 }
+
+h1 {
+    text-align: center;
+}
+
 .mainNav {
     display: flex;
     flex-direction: row;

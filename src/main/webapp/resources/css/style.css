@@ -4,15 +4,17 @@
     justify-content: center;
     align-items: center;
     font-size: 1.5em;
+    margin-top: 100px;
 }
 
-.home-button {
+.button-group > a {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     width: 5em;
     height: 5em;
-    border:0.1em solid #CCCCCC;
-    margin:0 0.3em 0.3em 0;
+    border: 0.1em solid #CCCCCC;
+    margin-right: 0.3em;
     font-family: sans-serif;
     color: black;
     text-decoration: none;
@@ -20,7 +22,7 @@
     transition: color 0.2s, background-color 0.2s, border-color 0.2s;
 }
 
-.home-button:hover {
+.button-group > a:hover {
     color: #FFFFFF;
     background-color: #C3042F;
     border-color: #C3042F;
