@@ -4,13 +4,86 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 template="./resources/layout.xhtml">
     <ui:define name="head">
         <title>Omništai – Siuntos informacija</title>
+        <h:outputStylesheet library="css" name="style.css"/>
     </ui:define>
     <ui:define name="content">
     <div>
-        <h2>Siunta - #{parcelInfo.currentParcel.name} (#{parcelInfo.currentParcel.weight} kg)</h2>
+        <h2>Gavėjo informacija</h2>
+        <table class="parcelsTable">
+            <tr>
+                <td>Vardas, Pavardė</td>
+                <td>Gatvė</td>
+                <td>Namo nr.</td>
+                <td>Buto nr.</td>
+                <td>Miestas</td>
+                <td>Šalis</td>
+                <td>Pašto kodas</td>
+            </tr>
+            <tr>
+                <td>#{parcelInfo.currentParcel.recipient}</td>
+                <td>#{parcelInfo.currentParcel.street}</td>
+                <td>#{parcelInfo.currentParcel.houseNumber}</td>
+                <td>#{parcelInfo.currentParcel.flatNumber}</td>
+                <td>#{parcelInfo.currentParcel.city}</td>
+                <td>#{parcelInfo.currentParcel.country}</td>
+                <td>#{parcelInfo.currentParcel.postalCode}</td>
+            </tr>
+        </table>
+
+        <h2>Siuntos parametrai</h2>
+        <table class="parcelsTable">
+            <tr>
+                <td>Ilgis(cm)</td>
+                <td>Plotis(cm)</td>
+                <td>Aukštis(cm)</td>
+                <td>Masė(kg)</td>
+            </tr>
+            <tr>
+                <td>#{parcelInfo.currentParcel.length}</td>
+                <td>#{parcelInfo.currentParcel.width}</td>
+                <td>#{parcelInfo.currentParcel.height}</td>
+                <td>#{parcelInfo.currentParcel.weight}</td>
+            </tr>
+        </table>
+
+        <h2>Bendra informacija</h2>
+        <table class="parcelsTable">
+            <tr>
+                <td>Išsiuntimo data</td>
+                <td>Statusas</td>
+                <td>Mokėjimo būdas</td>
+                <td>Galutinė kaina</td>
+            </tr>
+            <tr>
+                <td>#{parcelInfo.currentParcel.sentDate}</td>
+                <td>
+                    <c:if test="#{parcelInfo.currentParcel.status eq 'sent'}">
+                        Siunčiama
+                    </c:if>
+                    <c:if test="#{parcelInfo.currentParcel.status eq 'received'}">
+                        Gauta
+                    </c:if>
+                </td>
+                <td>
+                    <c:if test="#{parcelInfo.currentParcel.payOption eq 0}">
+                        Internetinė bankininkystė
+                    </c:if>
+                    <c:if test="#{parcelInfo.currentParcel.payOption eq 1}">
+                        Grynieji (paėmimo metu)
+                    </c:if>
+                    <c:if test="#{parcelInfo.currentParcel.payOption eq 2}">
+                        PayPal
+                    </c:if>
+                </td>
+                <td>#{parcelInfo.currentParcel.price}€</td>
+            </tr>
+        </table>
+        <br/>
+        <h:button value="Atgal" outcome="parcel_list" class="backButton"/>
     </div>
     </ui:define>
 </ui:composition>

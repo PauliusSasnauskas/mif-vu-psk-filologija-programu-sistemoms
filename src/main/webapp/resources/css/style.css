@@ -31,4 +31,13 @@
 .parcelsTable, .parcelsTable tr, th, td {
     border: 1px solid black;
     border-collapse: collapse;
+    padding: 10px;
+}
+
+.parcelsTable tr:first-child td {
+    font-weight: bold;
+}
+
+.backButton {
+    margin-top: 40px;
 }
