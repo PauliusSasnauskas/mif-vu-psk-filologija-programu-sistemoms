@@ -31,8 +31,6 @@ public class SendParcel implements Serializable {
 
     private List<String> selectedOptions = new ArrayList<>();
 
-    private MathContext priceMC = new MathContext(3, RoundingMode.HALF_UP);
-
     public String goToPayment(){
         return "send3.xhtml";
     }
@@ -76,28 +74,26 @@ public class SendParcel implements Serializable {
     }};
 
     public void calcPrice() {
-        BigDecimal price = new BigDecimal("0.00", priceMC);
+        BigDecimal price = new BigDecimal("0");
+        price = price.setScale(2, RoundingMode.HALF_UP);
 
-        price = price.add(regionPriceOptions.get(countryRegionsOptions.get(parcelToSend.getCountry())), priceMC);
-        price.setScale(2, priceMC.getRoundingMode());
-
+        price = price.add(regionPriceOptions.get(countryRegionsOptions.get(parcelToSend.getCountry())));
 
         if (parcelToSend.getLength() > 50 || parcelToSend.getHeight() > 50 || parcelToSend.getWidth() > 50) {
-            price = price.add(new BigDecimal("10.00"), priceMC);
+            price = price.add(new BigDecimal("10.00"));
         }
 
         for (String option : selectedOptions) {
             if (option.equals("fragile")) {
                 BigDecimal weightBD = BigDecimal.valueOf(parcelToSend.getWeight());
-                weightBD = weightBD.setScale(3, priceMC.getRoundingMode());
-                price = price.add((priceOptions.get(option)).multiply(weightBD, priceMC), priceMC);
+                weightBD = weightBD.setScale(3, RoundingMode.HALF_UP);
+                price = price.add((priceOptions.get(option)).multiply(weightBD));
             } else {
-                price = price.add(priceOptions.get(option), priceMC);
-
+                price = price.add(priceOptions.get(option));
             }
         }
 
-        parcelToSend.setPrice(price.setScale(2, priceMC.getRoundingMode()));
+        parcelToSend.setPrice(price.setScale(2, RoundingMode.HALF_UP));
         FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("senderInfoForm:currentPrice");
         FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("parcelInfoForm:currentPrice");
 
