@@ -99,9 +99,11 @@
                 <tr>
                     <td>Einamoji kaina: </td>
                     <td style="border: 1px solid black;">
-                        <h:outputLabel id="currentPrice" value="#{sendParcel.parcelToSend.price} €" >
-                            <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
-                        </h:outputLabel><br/>
+                        <h:form id="senderInfoPriceForm" style="margin: 1px">
+                            <h:outputLabel id="currentPrice" value=" #{sendParcel.parcelToSend.price} €" >
+                                <f:convertNumber minFractionDigits="2" maxFractionDigits="2"/>
+                            </h:outputLabel>
+                        </h:form>
                     </td>
                 </tr>
             </table>

@@ -5,6 +5,7 @@ import lombok.Setter;
 import lt.vu.mif.entities.Parcel;
 import lt.vu.mif.persistence.ParcelsDAO;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Model;
@@ -73,6 +74,12 @@ public class SendParcel implements Serializable {
         put("NOT_ES", new BigDecimal("1.00"));
     }};
 
+    @PostConstruct
+    public void init(){
+        parcelToSend.setPrice(new BigDecimal("3.00"));
+    }
+
+
     public void calcPrice() {
         BigDecimal price = new BigDecimal("0");
         price = price.setScale(2, RoundingMode.HALF_UP);
@@ -94,7 +101,7 @@ public class SendParcel implements Serializable {
         }
 
         parcelToSend.setPrice(price.setScale(2, RoundingMode.HALF_UP));
-        FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("senderInfoForm:currentPrice");
+        FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("senderInfoPriceForm:currentPrice");
         FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("parcelInfoForm:currentPrice");
 
     }
