@@ -28,9 +28,16 @@
     border-color: #C3042F;
 }
 
-.parcelsTable, .parcelsTable tr, th, td {
+.backButton {
+    margin-top: 40px;
+}
+
+.parcelsTable, .parcelsTable th {
     border: 1px solid black;
     border-collapse: collapse;
+}
+
+.parcelsTable tr:not(.parcelRow), .parcelsTable tr:not(.parcelRow) td, .parcelsTable th {
     padding: 10px;
 }
 
@@ -38,6 +45,21 @@
     font-weight: bold;
 }
 
-.backButton {
-    margin-top: 40px;
+.parcelsTable td a {
+    display: block;
+    padding: 10px;
+}
+
+.parcelsTable, .parcelsTable tr, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.parcelRow:hover {
+    background: #DEDEDE;
+}
+
+.parcelRow a {
+    color: #000000;
+    text-decoration: none;
 }

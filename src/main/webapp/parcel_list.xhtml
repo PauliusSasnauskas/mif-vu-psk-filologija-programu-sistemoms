@@ -13,6 +13,7 @@
     <div>
         <div>
             <h2>Siuntų sąrašas</h2>
+            <p>Paspaudę ant siuntos galite peržiūrėti detalią siuntos informaciją.</p>
             <br/>
             <table class="parcelsTable">
                 <tr>
@@ -23,12 +24,12 @@
                     <th>Kaina</th>
                 </tr>
                 <ui:repeat value="#{parcels.parcelList}" var="parcel">
-                    <tr>
-                        <td><h:link value="#{parcel.id}" outcome="parcel?id=#{parcel.id}" /></td>
-                        <td>#{parcel.recipient}</td>
-                        <td>#{parcel.sentDate}</td>
-                        <td>#{parcel.status}</td>
-                        <td>#{parcel.price}€</td>
+                    <tr class="parcelRow">
+                        <td><a href="parcel.xhtml?id=#{parcel.id}">#{parcel.id}</a></td>
+                        <td><a href="parcel.xhtml?id=#{parcel.id}">#{parcel.recipient}</a></td>
+                        <td><a href="parcel.xhtml?id=#{parcel.id}">#{parcel.sentDate}</a></td>
+                        <td><a href="parcel.xhtml?id=#{parcel.id}">#{parcel.status}</a></td>
+                        <td><a href="parcel.xhtml?id=#{parcel.id}">#{parcel.price}€</a></td>
                     </tr>
                 </ui:repeat>
             </table>
