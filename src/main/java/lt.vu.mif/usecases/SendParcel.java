@@ -79,14 +79,20 @@ public class SendParcel implements Serializable {
         parcelToSend.setPrice(new BigDecimal("3.00"));
     }
 
+    public BigDecimal getCountryPrice(){
+        return regionPriceOptions.get(countryRegionsOptions.get(parcelToSend.getCountry()));
+    }
+    public boolean isDimensionsOverLimits(){
+        return parcelToSend.getLength() > 50 || parcelToSend.getHeight() > 50 || parcelToSend.getWidth() > 50;
+    }
 
     public void calcPrice() {
         BigDecimal price = new BigDecimal("0");
         price = price.setScale(2, RoundingMode.HALF_UP);
 
-        price = price.add(regionPriceOptions.get(countryRegionsOptions.get(parcelToSend.getCountry())));
+        price = price.add(getCountryPrice());
 
-        if (parcelToSend.getLength() > 50 || parcelToSend.getHeight() > 50 || parcelToSend.getWidth() > 50) {
+        if (isDimensionsOverLimits()) {
             price = price.add(new BigDecimal("10.00"));
         }
 
@@ -95,6 +101,8 @@ public class SendParcel implements Serializable {
                 BigDecimal weightBD = BigDecimal.valueOf(parcelToSend.getWeight());
                 weightBD = weightBD.setScale(3, RoundingMode.HALF_UP);
                 price = price.add((priceOptions.get(option)).multiply(weightBD));
+
+                priceOptionsNames.put("fragile", "Dūžtanti siunta (+" + (priceOptions.get(option)).multiply(BigDecimal.valueOf(parcelToSend.getWeight())) + "€)");
             } else {
                 price = price.add(priceOptions.get(option));
             }

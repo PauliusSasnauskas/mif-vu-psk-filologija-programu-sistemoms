@@ -4,7 +4,7 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core"
                 template="./resources/layout.xhtml">
     <ui:define name="head">
         <title>Omništai – Apmokėjimas</title>
@@ -15,10 +15,13 @@
     <h3>Apmokėjimas</h3>
     <h4>Jūsų užsakymas</h4>
     <ul>
-        <li>Siuntos siuntimas į #{sendParcel.parcelToSend.country} – ???€</li>
+        <li>Siuntos siuntimas į #{sendParcel.parcelToSend.country} (#{sendParcel.countryPrice}€)</li>
         <ui:repeat value="#{sendParcel.selectedOptions}" var="option">
             <li>#{sendParcel.getPriceOptionsNames().get(option)}</li>
         </ui:repeat>
+        <c:if test="#{sendParcel.dimensionsOverLimits}">
+            <li>Didelių gabaritų siunta (+10€)</li>
+        </c:if>
     </ul>
 
     <b><h:outputLabel id="currentPrice" value="Kaina: #{sendParcel.parcelToSend.price} €" >
