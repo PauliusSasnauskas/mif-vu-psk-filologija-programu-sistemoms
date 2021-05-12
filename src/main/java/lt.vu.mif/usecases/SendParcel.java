@@ -3,21 +3,21 @@ package lt.vu.mif.usecases;
 import lombok.Getter;
 import lombok.Setter;
 import lt.vu.mif.entities.Parcel;
+import lt.vu.mif.logic.PaymentProcessor;
 import lt.vu.mif.persistence.ParcelsDAO;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.Dependent;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.math.RoundingMode;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Model
 @Getter
@@ -135,17 +135,14 @@ public class SendParcel implements Serializable {
         put("sustainable", "Siųsti gamtą tausojančiu būdu (siuntą siųs kurjeris su dviračiu) (+30€)");
     }};
 
-    private String getTodaysDate(){
-        return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-    }
+    @Inject
+    private PaymentProcessor processor;
 
-    @Transactional
     public String commitSend(){
-        parcelToSend.setSentDate(getTodaysDate());
-        parcelToSend.setStatus("sent");        // placeholder status
-        parcelsDAO.persist(parcelToSend);
+        processor.process(parcelToSend);
+
         parcelToSend = new Parcel();
-        System.out.println(parcelToSend.toString());
+
         return "index.xhtml";
     }
 }

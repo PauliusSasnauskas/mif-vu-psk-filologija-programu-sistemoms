@@ -5,6 +5,7 @@ import lt.vu.mif.entities.Parcel;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @ApplicationScoped
@@ -21,11 +22,17 @@ public class ParcelsDAO {
         this.em = em;
     }
 
+    @Transactional
     public void persist(Parcel p){
         this.em.persist(p);
     }
 
     public Parcel findOne(int id) {
         return em.find(Parcel.class, id);
+    }
+
+    @Transactional
+    public Parcel merge(Parcel p){
+        return this.em.merge(p);
     }
 }
