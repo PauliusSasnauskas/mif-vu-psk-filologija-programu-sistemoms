@@ -1,6 +1,7 @@
 package lt.vu.mif.logic;
 
 import lt.vu.mif.entities.Parcel;
+import lt.vu.mif.interceptors.LoggedInvocation;
 import lt.vu.mif.persistence.ParcelsDAO;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -38,6 +39,7 @@ public class PaymentProcessingSecure implements PaymentProcessingStrategy{
     }
 
     @Override
+    @LoggedInvocation
     public Parcel processParcelPayment(Parcel p) {
 
         processStep1(p);

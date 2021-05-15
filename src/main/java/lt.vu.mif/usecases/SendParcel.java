@@ -80,7 +80,7 @@ public class SendParcel implements Serializable {
     }
 
     public BigDecimal getCountryPrice(){
-        return regionPriceOptions.get(countryRegionsOptions.get(parcelToSend.getCountry()));
+        return regionPriceOptions.get(countryRegionsOptions.get(parcelToSend.getRecipientCountry()));
     }
     public boolean isDimensionsOverLimits(){
         return parcelToSend.getLength() > 50 || parcelToSend.getHeight() > 50 || parcelToSend.getWidth() > 50;

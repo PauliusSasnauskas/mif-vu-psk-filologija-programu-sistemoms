@@ -7,4 +7,7 @@
     <alternatives>
         <class>lt.vu.mif.logic.PaymentProcessingSecure</class>
     </alternatives>
+    <interceptors>
+        <class>lt.vu.mif.interceptors.MethodLogger</class>
+    </interceptors>
 </beans>

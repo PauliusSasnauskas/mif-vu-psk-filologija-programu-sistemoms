@@ -1,6 +1,7 @@
 package lt.vu.mif.logic;
 
 import lt.vu.mif.entities.Parcel;
+import lt.vu.mif.interceptors.LoggedInvocation;
 import lt.vu.mif.persistence.ParcelsDAO;
 
 import javax.enterprise.inject.Default;
@@ -21,6 +22,7 @@ public class PaymentProcessingFast implements PaymentProcessingStrategy{
 
     @Override
     @Transactional(Transactional.TxType.REQUIRES_NEW)
+    @LoggedInvocation
     public Parcel processParcelPayment(Parcel p) {
         System.out.println("Added0...");
         p.setSentDate(getTodaysDate());

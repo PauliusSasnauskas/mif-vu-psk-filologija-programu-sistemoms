@@ -15,7 +15,7 @@
     <h3>Apmokėjimas</h3>
     <h4>Jūsų užsakymas</h4>
     <ul>
-        <li>Siuntos siuntimas į #{sendParcel.parcelToSend.country} (#{sendParcel.countryPrice}€)</li>
+        <li>Siuntos siuntimas į #{sendParcel.parcelToSend.recipientCountry} (#{sendParcel.countryPrice}€)</li>
         <ui:repeat value="#{sendParcel.selectedOptions}" var="option">
             <li>#{sendParcel.getPriceOptionsNames().get(option)}</li>
         </ui:repeat>
