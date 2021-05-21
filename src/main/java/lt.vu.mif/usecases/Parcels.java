@@ -45,4 +45,8 @@ public class Parcels {
     public void setParcelToCreate(Parcel p){
         parcelToCreate = p;
     }
+
+    public Parcel getParcelById(int id){
+        return parcelsDAO.findOne(id);
+    }
 }

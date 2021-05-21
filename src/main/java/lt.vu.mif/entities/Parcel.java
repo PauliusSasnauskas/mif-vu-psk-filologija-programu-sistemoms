@@ -48,8 +48,13 @@ public class Parcel implements Serializable {
     private String senderCity;
     private String senderCountry;
     private int senderPostalCode;
+    private String senderPhoneNumber;
 
     private String sentDate;
     private String status;
     private int payOption;
+
+    @Version
+    @Column(name = "OPT_LOCK_VERSION")
+    private Integer version;
 }
