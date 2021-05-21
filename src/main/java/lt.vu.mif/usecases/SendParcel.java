@@ -7,7 +7,8 @@ import lt.vu.mif.logic.PaymentProcessor;
 import lt.vu.mif.persistence.ParcelsDAO;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.Conversation;
+import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -22,7 +23,7 @@ import java.util.Map;
 @Model
 @Getter
 @Setter
-@SessionScoped
+@ConversationScoped
 public class SendParcel implements Serializable {
 
     @Inject
@@ -32,19 +33,36 @@ public class SendParcel implements Serializable {
 
     private List<String> selectedOptions = new ArrayList<>();
 
+    private static final long serialVersionUID = 1L;
+
+    @Inject
+    private Conversation conversation;
+
+    public void initConversation() {
+        if(!FacesContext.getCurrentInstance().isPostback() && conversation.isTransient()){
+            conversation.begin();
+        }
+    }
+
     public String goToPayment(){
-        return "send3.xhtml";
+        return "send3?faces-redirect=true";
     }
 
     public String goToParcelParameters(){
-        return "send2.xhtml";
+        return "send2?faces-redirect=true";
     }
 
     public String goToRecipientParameters(){
-        return "send1.xhtml";
+        return "send1?faces-redirect=true";
     }
 
     public String goToHomePage(){
+
+        if(!conversation.isTransient()) {
+            System.out.println("!!!!! Conversation ended at home !!!!!");
+            conversation.end();
+        }
+
         return "index.xhtml";
     }
 
@@ -55,7 +73,6 @@ public class SendParcel implements Serializable {
         put("sustainable", new BigDecimal("30.00"));
     }};
 
-    // Feel free to change countryOptions and CountryPriceOptions maps
     private final List<String> countryOptions = new ArrayList<String>(){{
        add("Lietuva");
        add("Latvija");
@@ -73,11 +90,6 @@ public class SendParcel implements Serializable {
         put("ES", new BigDecimal("2.00"));
         put("NOT_ES", new BigDecimal("1.00"));
     }};
-
-    @PostConstruct
-    public void init(){
-        parcelToSend.setPrice(new BigDecimal("3.00"));
-    }
 
     public BigDecimal getCountryPrice(){
         return regionPriceOptions.get(countryRegionsOptions.get(parcelToSend.getRecipientCountry()));
@@ -109,6 +121,7 @@ public class SendParcel implements Serializable {
         }
 
         parcelToSend.setPrice(price.setScale(2, RoundingMode.HALF_UP));
+
         FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("senderInfoPriceForm:currentPrice");
         FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("parcelInfoForm:currentPrice");
 
@@ -142,6 +155,11 @@ public class SendParcel implements Serializable {
         processor.process(parcelToSend);
 
         parcelToSend = new Parcel();
+
+        if(!conversation.isTransient()) {
+            System.out.println("!!!!! Conversation ended at home !!!!!");
+            conversation.end();
+        }
 
         return "index.xhtml";
     }

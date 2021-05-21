@@ -6,6 +6,10 @@
                 xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
                 xmlns:f="http://java.sun.com/jsf/core"
                 template="./resources/layout.xhtml">
+    <f:metadata>
+        <f:event type="preRenderView"
+                 listener="#{sendParcel.initConversation}" />
+    </f:metadata>
     <ui:define name="head">
         <title>Omništai – Gavėjo informacija</title>
     </ui:define>
@@ -19,7 +23,7 @@
                     <td>Vardas, Pavardė </td>
                     <td><h:inputText value="#{sendParcel.parcelToSend.senderName}"
                                      required="true" requiredMessage="Įveskite vardą ir pavardę!"/></td>
-                    <td style="width: 200px;"></td>
+                    <td style="width: 200px;"/>
                 </tr>
                 <tr>
                     <td>Gatvė</td>
@@ -52,7 +56,7 @@
                     <td>Šalis</td>
                     <td>
                         <h:selectOneMenu value="#{sendParcel.parcelToSend.senderCountry}">
-                            <f:ajax event="change" listener="#{sendParcel.calcPrice()}"/>
+                            <f:selectItem itemValue="#{null}" itemLabel="--pasirinkti--" />
                             <f:selectItems value="#{sendParcel.getCountryOptions()}"/>
                         </h:selectOneMenu>
                     </td>
@@ -74,7 +78,7 @@
                 <td>Vardas, Pavardė </td>
                 <td><h:inputText value="#{sendParcel.parcelToSend.recipientName}"
                                  required="true" requiredMessage="Įveskite vardą ir pavardę!"/></td>
-                <td style="width: 200px;"></td>
+                <td style="width: 200px;"/>
             </tr>
             <tr>
                 <td>Gatvė</td>
@@ -108,6 +112,7 @@
                 <td>
                     <h:selectOneMenu value="#{sendParcel.parcelToSend.recipientCountry}">
                         <f:ajax event="change" listener="#{sendParcel.calcPrice()}"/>
+                        <f:selectItem itemValue="#{null}" itemLabel="--pasirinkti--" />
                         <f:selectItems value="#{sendParcel.getCountryOptions()}"/>
                     </h:selectOneMenu>
                 </td>

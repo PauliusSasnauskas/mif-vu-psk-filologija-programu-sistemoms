@@ -11,5 +11,6 @@
         <module name="mif-vu-psk-filologija-programu-sistemoms" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="11" />
   </component>
 </project>
