@@ -116,7 +116,8 @@
             <tr>
                 <td>Šalis</td>
                 <td>
-                    <h:selectOneMenu value="#{sendParcel.parcelToSend.recipientCountry}">
+                    <h:selectOneMenu value="#{sendParcel.parcelToSend.recipientCountry}"
+                                     required="true" requiredMessage="Pasirinkite gavėjo šalį!">
                         <f:ajax event="change" listener="#{sendParcel.calcPrice()}"/>
                         <f:selectItem itemValue="#{null}" itemLabel="--pasirinkti--" />
                         <f:selectItems value="#{sendParcel.getCountryOptions()}"/>
