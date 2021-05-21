@@ -63,11 +63,11 @@
             <tr>
                 <td>#{parcelInfo.currentParcel.sentDate}</td>
                 <td>
-                    <c:if test="#{parcelInfo.currentParcel.status eq 'sent'}">
-                        Siunčiama
+                    <c:if test="#{parcelInfo.currentParcel.status eq 'Išsiųsta'}">
+                        Išsiųsta
                     </c:if>
-                    <c:if test="#{parcelInfo.currentParcel.status eq 'received'}">
-                        Gauta
+                    <c:if test="#{parcelInfo.currentParcel.status eq 'Apmokėjimas apdorojamas...'}">
+                        Laukiama mokėjimo patvirtinimo
                     </c:if>
                 </td>
                 <td>
