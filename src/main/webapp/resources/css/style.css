@@ -41,9 +41,9 @@
     padding: 10px;
 }
 
-.parcelsTable tr:first-child td {
-    font-weight: bold;
-}
+/*.parcelsTable tr:first-child td {*/
+/*    font-weight: bold;*/
+/*}*/
 
 .parcelsTable td a {
     display: block;

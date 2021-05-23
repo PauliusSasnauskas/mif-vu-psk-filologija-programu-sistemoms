@@ -7,6 +7,7 @@
                 template="./resources/layout.xhtml">
     <ui:define name="head">
         <title>Omništai – Siuntų sąrašas</title>
+        <h:outputScript name="tableFilter.js" />
         <h:outputStylesheet library="css" name="style.css"/>
     </ui:define>
     <ui:define name="content">
@@ -15,24 +16,37 @@
             <h2>Siuntų sąrašas</h2>
             <p>Paspaudę ant siuntos galite peržiūrėti detalią siuntos informaciją.</p>
             <br/>
-            <table class="parcelsTable">
-                <tr>
-                    <th>Nr.</th>
-                    <th>Gavėjas</th>
-                    <th>Išsiuntimo data</th>
-                    <th>Būsena</th>
-                    <th>Kaina</th>
-                </tr>
-                <ui:repeat value="#{parcels.parcelList}" var="parcel">
-                    <tr class="parcelRow">
-                        <td><a href="parcel.xhtml?id=#{parcel.id}">#{parcel.id}</a></td>
-                        <td><a href="parcel.xhtml?id=#{parcel.id}">#{parcel.recipient}</a></td>
-                        <td><a href="parcel.xhtml?id=#{parcel.id}">#{parcel.sentDate}</a></td>
-                        <td><a href="parcel.xhtml?id=#{parcel.id}">#{parcel.status}</a></td>
-                        <td><a href="parcel.xhtml?id=#{parcel.id}">#{parcel.price}€</a></td>
+            <input type="text" id="parcelTableInputt" onkeyup="filterAll()" placeholder="Paieška"/>
+            <table class="parcelsTable" id="parcelTable">
+                    <thead>
+                    <tr class="filters">
+                        <th><input type="text" id="parcelTableInput" placeholder="Nr." onkeyup="filterNumber()"/></th>
+                        <th><input type="text" id="parcelTableInput2" placeholder="Gavėjas" onkeyup="filterRecipient()"/></th>
+                        <th><input type="text" id="parcelTableInput3" placeholder="Išsiuntimo data" onkeyup="filterDate()"/></th>
+                        <th><input type="text" id="parcelTableInput4" placeholder="Būsena" onkeyup="filterStatus()"/></th>
+                        <th><input type="text" id="parcelTableInput5" placeholder="Kaina" onkeyup="filterPrice()"/></th>
                     </tr>
-                </ui:repeat>
-            </table>
+                    </thead>
+<!--                    <tr>-->
+<!--                        <th>Nr.</th>-->
+<!--                        <th>Gavėjas</th>-->
+<!--                        <th>Išsiuntimo data</th>-->
+<!--                        <th>Būsena</th>-->
+<!--                        <th>Kaina</th>-->
+<!--                    </tr>-->
+                    <tbody>
+                    <ui:repeat value="#{parcels.parcelList}" var="parcel">
+                        <tr class="parcelRow">
+                            <td><a href="parcel.xhtml?id=#{parcel.id}">#{parcel.id}</a></td>
+                            <td><a href="parcel.xhtml?id=#{parcel.id}">#{parcel.recipient}</a></td>
+                            <td><a href="parcel.xhtml?id=#{parcel.id}">#{parcel.sentDate}</a></td>
+                            <td><a href="parcel.xhtml?id=#{parcel.id}">#{parcel.status}</a></td>
+                            <td><a href="parcel.xhtml?id=#{parcel.id}">#{parcel.price}€</a></td>
+                        </tr>
+                    </ui:repeat>
+                    </tbody>
+
+                </table>
         </div>
     </div>
     </ui:define>
