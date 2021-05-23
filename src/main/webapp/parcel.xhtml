@@ -3,7 +3,9 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 template="./resources/layout.xhtml">
     <ui:define name="head">
@@ -24,13 +26,13 @@
                 <td>Pašto kodas</td>
             </tr>
             <tr>
-                <td>#{parcelInfo.currentParcel.recipient}</td>
-                <td>#{parcelInfo.currentParcel.street}</td>
-                <td>#{parcelInfo.currentParcel.houseNumber}</td>
-                <td>#{parcelInfo.currentParcel.flatNumber}</td>
-                <td>#{parcelInfo.currentParcel.city}</td>
-                <td>#{parcelInfo.currentParcel.country}</td>
-                <td>#{parcelInfo.currentParcel.postalCode}</td>
+                <td>#{parcelInfo.currentParcel.recipientName}</td>
+                <td>#{parcelInfo.currentParcel.recipientStreet}</td>
+                <td>#{parcelInfo.currentParcel.recipientHouseNumber}</td>
+                <td>#{parcelInfo.currentParcel.recipientFlatNumber}</td>
+                <td>#{parcelInfo.currentParcel.recipientCity}</td>
+                <td>#{parcelInfo.currentParcel.recipientCountry}</td>
+                <td>#{parcelInfo.currentParcel.recipientPostalCode}</td>
             </tr>
         </table>
 
@@ -61,11 +63,11 @@
             <tr>
                 <td>#{parcelInfo.currentParcel.sentDate}</td>
                 <td>
-                    <c:if test="#{parcelInfo.currentParcel.status eq 'sent'}">
-                        Siunčiama
+                    <c:if test="#{parcelInfo.currentParcel.status eq 'Išsiųsta'}">
+                        Išsiųsta
                     </c:if>
-                    <c:if test="#{parcelInfo.currentParcel.status eq 'received'}">
-                        Gauta
+                    <c:if test="#{parcelInfo.currentParcel.status eq 'Apmokėjimas apdorojamas...'}">
+                        Laukiama mokėjimo patvirtinimo
                     </c:if>
                 </td>
                 <td>
@@ -82,6 +84,49 @@
                 <td>#{parcelInfo.currentParcel.price}€</td>
             </tr>
         </table>
+
+        <h2>Siuntėjo informacija</h2>
+        <table class="parcelsTable">
+            <tr>
+                <td>Vardas, Pavardė</td>
+                <td>Gatvė</td>
+                <td>Namo nr.</td>
+                <td>Buto nr.</td>
+                <td>Miestas</td>
+                <td>Šalis</td>
+                <td>Pašto kodas</td>
+            </tr>
+            <tr>
+                <td>#{parcelInfo.currentParcel.senderName}</td>
+                <td>#{parcelInfo.currentParcel.senderStreet}</td>
+                <td>#{parcelInfo.currentParcel.senderHouseNumber}</td>
+                <td>#{parcelInfo.currentParcel.senderFlatNumber}</td>
+                <td>#{parcelInfo.currentParcel.senderCity}</td>
+                <td>#{parcelInfo.currentParcel.senderCountry}</td>
+                <td>#{parcelInfo.currentParcel.senderPostalCode}</td>
+            </tr>
+        </table>
+        <h4>Siuntėjo telefono numeris: #{parcelInfo.currentParcel.senderPhoneNumber}</h4>
+        <h:form>
+            <h:inputText a:placeholder="naujas telefono numeris" value="#{updateData.parcelToUpdate.senderPhoneNumber}"
+                         required="true" />
+            <h:commandButton value="Atnaujinti" action="#{updateData.updateParcelData}">
+                <f:param name="id" value="#{parcelInfo.currentParcel.id}" />
+            </h:commandButton>
+        </h:form>
+
+        <p:confirmDialog id="dialogID" widgetVar="confirmDialog" global="true" showEffect="fade"
+                         message="Telefono numeris jau buvo pakeistas į „#{parcels.getParcelById(parcelInfo.currentParcel.id).senderPhoneNumber}“
+                          Ar vis tiek norite įrašyti pakeitimą?"
+                         hideEffect="fade" responsive="true" width="350">
+            <p:commandButton value="Taip" onclick="PF('confirmDialog').hide();" type="submit" action="#{updateData.updateParcelAfterLock}" styleClass="ui-confirmdialog-yes" >
+                <f:param name="id" value="#{parcelInfo.currentParcel.id}" />
+            </p:commandButton>
+            <p:commandButton value="Ne"  onclick="PF('confirmDialog').hide();" type="submit" action="#{updateData.dontUpdateParcelAfterLock}" styleClass="ui-confirmdialog-no ui-button-flat">
+                <f:param name="id" value="#{parcelInfo.currentParcel.id}" />
+            </p:commandButton>
+        </p:confirmDialog>
+
         <br/>
         <h:button value="Atgal" outcome="parcel_list" class="backButton"/>
     </div>

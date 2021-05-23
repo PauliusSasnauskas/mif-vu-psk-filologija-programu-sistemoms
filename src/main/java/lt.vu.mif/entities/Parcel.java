@@ -33,15 +33,28 @@ public class Parcel implements Serializable {
 
     private BigDecimal price;
 
-    private String recipient;
-    private String street;
-    private int houseNumber;
-    private int flatNumber;
-    private String city;
-    private String country;
-    private int postalCode;
+    private String recipientName;
+    private String recipientStreet;
+    private int recipientHouseNumber;
+    private int recipientFlatNumber;
+    private String recipientCity;
+    private String recipientCountry;
+    private int recipientPostalCode;
+
+    private String senderName;
+    private String senderStreet;
+    private int senderHouseNumber;
+    private int senderFlatNumber;
+    private String senderCity;
+    private String senderCountry;
+    private int senderPostalCode;
+    private String senderPhoneNumber;
+
     private String sentDate;
     private String status;
-
     private int payOption;
+
+    @Version
+    @Column(name = "OPT_LOCK_VERSION")
+    private Integer version;
 }

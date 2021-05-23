@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="ParcelsDB" uuid="fe724b80-0b4e-46d6-9a8f-024348020171">
-      <driver-ref>h2.unified</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.h2.Driver</jdbc-driver>
-      <jdbc-url>jdbc:h2:~/h2database/ParcelsDB;AUTO_SERVER=TRUE</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="ParcelsDB [2]" uuid="6feb9ca2-f1ed-40ce-9337-a534f107e2ac">
+    <data-source source="LOCAL" name="ParcelsDB" uuid="ee48ccfa-b3cc-43b8-9f3b-93e85b79c960">
       <driver-ref>h2.unified</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.h2.Driver</jdbc-driver>

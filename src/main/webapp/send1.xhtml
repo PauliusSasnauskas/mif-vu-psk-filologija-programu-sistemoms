@@ -6,29 +6,94 @@
                 xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
                 xmlns:f="http://java.sun.com/jsf/core"
                 template="./resources/layout.xhtml">
+    <f:metadata>
+        <f:event type="preRenderView"
+                 listener="#{sendParcel.initConversation}" />
+    </f:metadata>
     <ui:define name="head">
         <title>Omništai – Gavėjo informacija</title>
     </ui:define>
     <ui:define name="content">
     <br/><br/>
-    <div><b>Gavėjo informacija</b> → Siuntos informacija → Apmokėjimas</div>
-    <h3>Gavėjo informacija:</h3>
-    <h:form style=" float: left;">
+    <div><b>Siuntėjo ir gavėjo informacija</b> → Siuntos informacija → Apmokėjimas</div>
+        <h3>Siuntėjo informacija:</h3>
+        <h:form style=" float: left;">
+            <table>
+                <tr>
+                    <td>Vardas, Pavardė </td>
+                    <td><h:inputText value="#{sendParcel.parcelToSend.senderName}"
+                                     required="true" requiredMessage="Įveskite vardą ir pavardę!"/></td>
+                    <td style="width: 200px;"/>
+                </tr>
+                <tr>
+                    <td>Gatvė</td>
+                    <td><h:inputText value="#{sendParcel.parcelToSend.senderStreet}"
+                                     required="true" requiredMessage="Įveskite gatvės pavadinimą!"/></td>
+                </tr>
+                <tr>
+                    <td>Namo nr.</td>
+                    <td><h:inputText value="#{sendParcel.parcelToSend.senderHouseNumber}"
+                                     required="true" requiredMessage="Įveskite namo numerį!"
+                                     converterMessage="Namo numeris turi būti sudarytas iš skaitmenų"
+                                     validatorMessage="Namo numeris turi būti neneigiamas skaičius.">
+                        <f:validateLongRange minimum="0" />
+                    </h:inputText></td>
+                </tr>
+                <tr>
+                    <td>Buto nr.</td>
+                    <td><h:inputText value="#{sendParcel.parcelToSend.senderFlatNumber}"
+                                     converterMessage="Buto numeris turi būti sudarytas iš skaitmenų"
+                                     validatorMessage="Buto numeris turi būti neneigiamas skaičius.">
+                        <f:validateLongRange minimum="0" />
+                    </h:inputText></td>
+                </tr>
+                <tr>
+                    <td>Miestas</td>
+                    <td><h:inputText value="#{sendParcel.parcelToSend.senderCity}"
+                                     required="true" requiredMessage="Įveskite miesto pavadinimą!"/></td>
+                </tr>
+                <tr>
+                    <td>Šalis</td>
+                    <td>
+                        <h:selectOneMenu value="#{sendParcel.parcelToSend.senderCountry}">
+                            <f:selectItem itemValue="#{null}" itemLabel="--pasirinkti--" />
+                            <f:selectItems value="#{sendParcel.getCountryOptions()}"/>
+                        </h:selectOneMenu>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Pašto kodas</td>
+                    <td><h:inputText value="#{sendParcel.parcelToSend.senderPostalCode}"
+                                     required="true" requiredMessage="Įveskite pašto kodą!"
+                                     converterMessage="Pašto kodas turi būti sudarytas iš skaitmenų"
+                                     validatorMessage="Pašto kodas turi būti neneigiamas skaičius.">
+                        <f:validateLongRange minimum="0" />
+                    </h:inputText></td>
+                </tr>
+                <tr>
+                    <td>Telefono numeris</td>
+                    <td><h:inputText value="#{sendParcel.parcelToSend.senderPhoneNumber}"
+                                     required="true" requiredMessage="Įveskite telefono numerį!"/>
+                    </td>
+                </tr>
+            </table>
+            <br/>
+        <h3>Gavėjo informacija:</h3>
         <table>
             <tr>
                 <td>Vardas, Pavardė </td>
-                <td><h:inputText value="#{sendParcel.parcelToSend.recipient}"
+                <td><h:inputText value="#{sendParcel.parcelToSend.recipientName}"
                                  required="true" requiredMessage="Įveskite vardą ir pavardę!"/></td>
-                <td style="width: 200px;"></td>
+                <td style="width: 200px;"/>
             </tr>
             <tr>
                 <td>Gatvė</td>
-                <td><h:inputText value="#{sendParcel.parcelToSend.street}"
+                <td><h:inputText value="#{sendParcel.parcelToSend.recipientStreet}"
                                  required="true" requiredMessage="Įveskite gatvės pavadinimą!"/></td>
             </tr>
             <tr>
                 <td>Namo nr.</td>
-                <td><h:inputText value="#{sendParcel.parcelToSend.houseNumber}"
+                <td><h:inputText value="#{sendParcel.parcelToSend.recipientHouseNumber}"
                                  required="true" requiredMessage="Įveskite namo numerį!"
                                  converterMessage="Namo numeris turi būti sudarytas iš skaitmenų"
                                  validatorMessage="Namo numeris turi būti neneigiamas skaičius.">
@@ -37,7 +102,7 @@
             </tr>
             <tr>
                 <td>Buto nr.</td>
-                <td><h:inputText value="#{sendParcel.parcelToSend.flatNumber}"
+                <td><h:inputText value="#{sendParcel.parcelToSend.recipientFlatNumber}"
                                  converterMessage="Buto numeris turi būti sudarytas iš skaitmenų"
                                  validatorMessage="Buto numeris turi būti neneigiamas skaičius.">
                         <f:validateLongRange minimum="0" />
@@ -45,21 +110,23 @@
             </tr>
             <tr>
                 <td>Miestas</td>
-                <td><h:inputText value="#{sendParcel.parcelToSend.city}"
+                <td><h:inputText value="#{sendParcel.parcelToSend.recipientCity}"
                                  required="true" requiredMessage="Įveskite miesto pavadinimą!"/></td>
             </tr>
             <tr>
                 <td>Šalis</td>
                 <td>
-                    <h:selectOneMenu value="#{sendParcel.parcelToSend.country}">
+                    <h:selectOneMenu value="#{sendParcel.parcelToSend.recipientCountry}"
+                                     required="true" requiredMessage="Pasirinkite gavėjo šalį!">
                         <f:ajax event="change" listener="#{sendParcel.calcPrice()}"/>
+                        <f:selectItem itemValue="#{null}" itemLabel="--pasirinkti--" />
                         <f:selectItems value="#{sendParcel.getCountryOptions()}"/>
                     </h:selectOneMenu>
                 </td>
             </tr>
             <tr>
                 <td>Pašto kodas</td>
-                <td><h:inputText value="#{sendParcel.parcelToSend.postalCode}"
+                <td><h:inputText value="#{sendParcel.parcelToSend.recipientPostalCode}"
                                  required="true" requiredMessage="Įveskite pašto kodą!"
                                  converterMessage="Pašto kodas turi būti sudarytas iš skaitmenų"
                                  validatorMessage="Pašto kodas turi būti neneigiamas skaičius.">
