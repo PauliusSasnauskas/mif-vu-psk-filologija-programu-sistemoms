@@ -21,7 +21,7 @@
         <h:graphicImage url="/resources/img/omnistai_logo.png"/>
       </a>
       <div class="navOther">
-        <a href="login.xhtml">Login</a>
+        <a href="login.xhtml">#{loggedIn.getIsLoggedIn() ? "Welcome, admin!" : "Login"}</a>
       </div>
     </nav>
   </div>

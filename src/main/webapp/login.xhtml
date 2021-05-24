@@ -14,10 +14,11 @@
     <h1>Prisijungti</h1>
     <h:form styleClass="login-form">
       <span>Naudotojo vardas: </span>
-      <h:inputText value="" required="true" requiredMessage="Įveskite naudotojo vardą."/><br/>
+      <h:inputText value="#{loggedIn.username}" required="true" requiredMessage="Įveskite naudotojo vardą."/><br/>
       <span>Slaptažodis: </span>
-      <h:inputSecret value="" required="true" requiredMessage="Įveskite slaptažodį."/><br/>
-      <h:commandButton styleClass="login-button" value="Prisijungti"/><br/>
+      <h:inputSecret value="#{loggedIn.password}" required="true" requiredMessage="Įveskite slaptažodį."/><br/>
+      <h:commandButton styleClass="login-button" value="Prisijungti" action="#{loggedIn.login}"/>
+      <br/>
       Neturite paskyros? <a href="#">Registruokitės</a>.
     </h:form>
   </ui:define>
