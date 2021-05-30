@@ -114,7 +114,9 @@ public class SendParcel implements Serializable {
                 weightBD = weightBD.setScale(3, RoundingMode.HALF_UP);
                 price = price.add((priceOptions.get(option)).multiply(weightBD));
 
-                priceOptionsNames.put("fragile", "Dūžtanti siunta (+" + (priceOptions.get(option)).multiply(BigDecimal.valueOf(parcelToSend.getWeight())) + "€)");
+                BigDecimal fragilePrice = (priceOptions.get(option)).multiply(weightBD);
+
+                priceOptionsNames.put("fragile", "Dūžtanti siunta (+" + fragilePrice.setScale(2, RoundingMode.HALF_UP) + "€)");
             } else {
                 price = price.add(priceOptions.get(option));
             }
