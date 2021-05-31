@@ -7,7 +7,7 @@
                 template="./resources/layout.xhtml">
     <ui:define name="head">
         <title>Omništai – Siuntų sąrašas</title>
-        <h:outputScript name="tableFilter.js" />
+        <h:outputScript p:defer="true" name="tableFilter.js" />
         <h:outputStylesheet library="css" name="style.css"/>
     </ui:define>
     <ui:define name="content">
@@ -16,15 +16,15 @@
             <h2>Siuntų sąrašas</h2>
             <p>Paspaudę ant siuntos galite peržiūrėti detalią siuntos informaciją.</p>
             <br/>
-            <input type="text" id="parcelTableInputt" onkeyup="filterAll()" placeholder="Paieška"/>
+            <input type="text" id="parcelTableInputAll" onkeyup="filterAll()" placeholder="Paieška" style="margin-bottom: 8px;"/>
             <table class="parcelsTable" id="parcelTable">
                     <thead>
                     <tr class="filters">
-                        <th><input type="text" id="parcelTableInput" placeholder="Nr." onkeyup="filterNumber()"/></th>
-                        <th><input type="text" id="parcelTableInput2" placeholder="Gavėjas" onkeyup="filterRecipient()"/></th>
-                        <th><input type="text" id="parcelTableInput3" placeholder="Išsiuntimo data" onkeyup="filterDate()"/></th>
-                        <th><input type="text" id="parcelTableInput4" placeholder="Būsena" onkeyup="filterStatus()"/></th>
-                        <th><input type="text" id="parcelTableInput5" placeholder="Kaina" onkeyup="filterPrice()"/></th>
+                        <th><input type="text" id="parcelTableInput1" placeholder="Nr."/></th>
+                        <th><input type="text" id="parcelTableInput2" placeholder="Gavėjas"/></th>
+                        <th><input type="text" id="parcelTableInput3" placeholder="Išsiuntimo data"/></th>
+                        <th><input type="text" id="parcelTableInput4" placeholder="Būsena"/></th>
+                        <th><input type="text" id="parcelTableInput5" placeholder="Kaina"/></th>
                     </tr>
                     </thead>
 <!--                    <tr>-->

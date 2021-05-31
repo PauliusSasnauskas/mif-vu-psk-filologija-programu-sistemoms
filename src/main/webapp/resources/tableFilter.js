@@ -1,159 +1,63 @@
-function filterAll() {
-    var input, filter, table, tr, td, cell, i, j;
-    input = document.getElementById("parcelTableInputt");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("parcelTable");
-    tr = table.getElementsByTagName("tr");
-    for (i = 1; i < tr.length; i++) {
-        // Hide the row initially.
-        tr[i].style.display = "none";
+const table = document.getElementById("parcelTable");
+const rows = Array.from(table.getElementsByTagName("tr"));
+rows.splice(0, 1); // remove filter row
 
-        td = tr[i].getElementsByTagName("td");
-        for (var j = 0; j < td.length; j++) {
-            cell = tr[i].getElementsByTagName("td")[j];
-            if (cell) {
-                if (cell.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                    break;
-                }
+const items = [];
+
+// Get current row data
+rows.forEach((tr) => {
+    const tds = Array.from(tr.children);
+    const itemData = [];
+    tds.forEach((td) => {
+        itemData.push(td.innerText);
+    });
+    items.push({tr: tr, itemData: itemData});
+});
+
+// Filter by specific column
+const filterBy = (column, filterText) => {
+    items.forEach((item) => {
+        const text = item.itemData[column].toLowerCase();
+        if (!text.includes(filterText)){
+            item.tr.style.display = "none";
+        }else{
+            item.tr.style.display = "";
+        }
+    })
+};
+
+// Convenient function which returns event for each of the columns
+const filterByEvent = (column) => {
+    return (e) => {
+        filterBy(column-1, e.target.value.toLowerCase());
+    }
+};
+
+document.getElementById("parcelTableInput1").addEventListener("keyup", filterByEvent(1));
+document.getElementById("parcelTableInput2").addEventListener("keyup", filterByEvent(2));
+document.getElementById("parcelTableInput3").addEventListener("keyup", filterByEvent(3));
+document.getElementById("parcelTableInput4").addEventListener("keyup", filterByEvent(4));
+document.getElementById("parcelTableInput5").addEventListener("keyup", filterByEvent(5));
+
+// Filter by all columns
+const filterByAll = (filterText) => {
+    items.forEach((item) => {
+        let shouldHide = true;
+        for (let column of item.itemData){
+            if (column.toLowerCase().includes(filterText)){
+                shouldHide = false;
+                break;
             }
         }
-    }
-}
 
-function filterNumber() {
-    // Declare variables
-    var input, filter, table, tr, td, i, txtValue;
-    input = document.getElementById("parcelTableInput");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("parcelTable");
-    tr = table.getElementsByTagName("tr");
-
-    // Loop through all table rows, and hide those who don't match the search query
-    for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[0];
-        if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) <= -1) {
-            //     tr[i].style.display = "";
-            // } else {
-                tr[i].style.display = "none";
-            }
+        if (shouldHide){
+            item.tr.style.display = "none";
+        }else{
+            item.tr.style.display = "";
         }
-    }
-}
+    })
+};
 
-function filterRecipient() {
-    // Declare variables
-    var input, filter, table, tr, td, i, txtValue;
-    input = document.getElementById("parcelTableInput2");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("parcelTable");
-    tr = table.getElementsByTagName("tr");
-
-    // Loop through all table rows, and hide those who don't match the search query
-    for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[1];
-        if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) <= -1) {
-            //     tr[i].style.display = "";
-            // } else {
-                tr[i].style.display = "none";
-            }
-        }
-    }
-}
-
-
-function filterDate() {
-    var input, filter, table, tr, td, i, txtValue;
-    input = document.getElementById("parcelTableInput3");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("parcelTable");
-    tr = table.getElementsByTagName("tr");
-
-    // Loop through all table rows, and hide those who don't match the search query
-    for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[2];
-        if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) <= -1) {
-            //     tr[i].style.display = "";
-            // } else {
-                    tr[i].style.display = "none";
-            }
-        }
-    }
-}
-
-
-function filterStatus() {
-    // Declare variables
-    var input, filter, table, tr, td, i, txtValue;
-    input = document.getElementById("parcelTableInput4");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("parcelTable");
-    tr = table.getElementsByTagName("tr");
-
-    // Loop through all table rows, and hide those who don't match the search query
-    for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[3];
-        if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) <= -1) {
-            //     tr[i].style.display = "";
-            // } else {
-                tr[i].style.display = "none";
-            }
-        }
-    }
-}
-
-
-function filterPrice() {
-    // Declare variables
-    var input, filter, table, tr, td, i, txtValue;
-    input = document.getElementById("parcelTableInput5");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("parcelTable");
-    tr = table.getElementsByTagName("tr");
-
-    // Loop through all table rows, and hide those who don't match the search query
-    for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[4];
-        if (td) {
-            txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) <= -1) {
-            //     tr[i].style.display = "";
-            // } else {
-                tr[i].style.display = "none";
-            }
-        }
-    }
-}
-
-
-// function checkval(){
-//     1==$("tbody tr:visible").length&&"No result found"==$("tbody tr:visible td").html()?
-//         $("#rowcount").html("0"):
-//         $("#rowcount").html($("tr:visible").length-1)}$(document).ready(
-//     function(){
-//         $("#rowcount").html($(".filterable tr").length-1),
-//             $(".filterable .btn-filter").click(function(){
-//                 var t=$(this).parents(".filterable"),e=t.find(".filters input"),
-//                     l=t.find(".parcelsTable tbody");
-//                 (e.val("").prop("disabled",!0),
-//                     l.find(".no-result").remove(),
-//                     l.find("tr").show()),
-//                     $("#rowcount").html($(".filterable tr").length-1)}),
-//             $(".filterable .filters input").keyup(function(t){if("9"!=(t.keyCode||t.which)){
-//                 var e=$(this),l=e.val().toLowerCase(),
-//                     n=e.parents(".filterable"),
-//                     i=n.find(".filters th").index(e.parents("th")),
-//                     r=n.find(".parcelsTable"),
-//                     o=r.find("tbody tr"),d=o.filter(function(){
-//                         return-1===$(this).find("td").eq(i).text().toLowerCase().indexOf(l)});
-//                 r.find("tbody .no-result").remove(),o.show(),d.hide(),
-//                 d.length===o.length&&r.find("tbody").prepend($('<tr class="no-result text-center">' +
-//                     '<td colspan="'+r.find(".filters th").length+'">No result found</td></tr>'))}$("#rowcount").html($("tr:visible").length-1),checkval()})});
+document.getElementById("parcelTableInputAll").addEventListener("keyup", (e) => {
+    filterByAll(e.target.value.toLowerCase());
+});
